@@ -20,6 +20,7 @@ public class ProductServiceImpl implements ProductService {
         this.productRepository = productRepository;
     }
 
+
     @Override
     public List<Product> getProducts() {
         return productRepository.findAll();

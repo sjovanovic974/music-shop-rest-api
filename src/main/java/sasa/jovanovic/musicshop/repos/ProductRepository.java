@@ -11,6 +11,7 @@ import sasa.jovanovic.musicshop.models.Product;
 @Repository
 @CrossOrigin
 public interface ProductRepository extends JpaRepository<Product, Long> {
+
     Page<Product> findByCategoryId(@RequestParam("id") Long id, Pageable pageable);
 
     Page<Product> findByNameContaining(@RequestParam("name") String name, Pageable pageable);
