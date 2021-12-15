@@ -25,7 +25,7 @@ public class DataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        int count = productService.getProducts().size();
+        int count = productService.getAllProducts().size();
 
         if(count == 0) {
             loadData();

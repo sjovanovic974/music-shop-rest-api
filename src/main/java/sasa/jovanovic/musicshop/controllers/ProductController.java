@@ -1,11 +1,11 @@
 package sasa.jovanovic.musicshop.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import sasa.jovanovic.musicshop.models.Product;
 import sasa.jovanovic.musicshop.services.ProductService;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("products")
@@ -19,8 +19,8 @@ public class ProductController {
     }
 
     @GetMapping
-    public List<Product> getProducts(){
-        return productService.getProducts();
+    public Page<Product> getProducts(Pageable page){
+        return productService.getProducts(page);
     }
 
     @GetMapping("/{id}")
@@ -38,5 +38,15 @@ public class ProductController {
     public Product updateProduct(@RequestBody Product product){
         Product savedProduct = productService.saveProduct(product);
         return savedProduct;
+    }
+
+    @DeleteMapping
+    public void deleteProduct(@RequestBody Product product){
+        productService.deleteProduct(product);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteProductById(@PathVariable("id") Long id){
+        productService.deleteProductById(id);
     }
 }
