@@ -23,6 +23,16 @@ public class ProductController {
         return productService.getProducts(page);
     }
 
+    @GetMapping("/category/{id}")
+    public Page<Product> getProducts(@PathVariable("id") Long id, Pageable page){
+        return productService.findByCategoryId(id, page);
+    }
+
+    @GetMapping("/search")
+    public Page<Product> getProducts(@RequestParam("name") String name, Pageable page){
+        return productService.findByNameContaining(name, page);
+    }
+
     @GetMapping("/{id}")
     public Product getById(@PathVariable("id") Long id){
         return productService.getProductById(id);
@@ -30,14 +40,12 @@ public class ProductController {
 
     @PostMapping
     public Product saveProduct(@RequestBody Product product){
-        Product savedProduct = productService.saveProduct(product);
-        return savedProduct;
+        return productService.saveProduct(product);
     }
 
     @PutMapping
     public Product updateProduct(@RequestBody Product product){
-        Product savedProduct = productService.saveProduct(product);
-        return savedProduct;
+        return productService.saveProduct(product);
     }
 
     @DeleteMapping

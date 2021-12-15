@@ -34,6 +34,16 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Page<Product> findByCategoryId(Long id, Pageable page) {
+        return productRepository.findByCategoryId(id, page);
+    }
+
+    @Override
+    public Page<Product> findByNameContaining(String name, Pageable page){
+        return productRepository.findByNameContaining(name, page);
+    }
+
+    @Override
     public Product getProductById(Long id) {
         return productRepository.findById(id).orElseThrow(
                 () -> new NotFoundException("Product was not found!"));

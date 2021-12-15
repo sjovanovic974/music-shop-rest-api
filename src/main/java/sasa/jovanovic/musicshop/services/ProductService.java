@@ -12,6 +12,10 @@ public interface ProductService {
 
     Page<Product> getProducts(Pageable page);
 
+    Page<Product> findByCategoryId(Long id, Pageable page);
+
+    Page<Product> findByNameContaining(String name, Pageable page);
+
     Product getProductById(Long id);
 
     Product saveProduct(Product product);
