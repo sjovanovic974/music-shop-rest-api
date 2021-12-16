@@ -2,7 +2,7 @@ package sasa.jovanovic.musicshop.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sasa.jovanovic.musicshop.exceptions.NotFoundException;
+import sasa.jovanovic.musicshop.errorhandling.NotFoundException;
 import sasa.jovanovic.musicshop.models.ProductCategory;
 import sasa.jovanovic.musicshop.repos.ProductCategoryRepository;
 

@@ -4,8 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import sasa.jovanovic.musicshop.exceptions.NotFoundException;
+import sasa.jovanovic.musicshop.errorhandling.NotFoundException;
 import sasa.jovanovic.musicshop.models.Product;
+import sasa.jovanovic.musicshop.repos.ProductCategoryRepository;
 import sasa.jovanovic.musicshop.repos.ProductRepository;
 
 import javax.transaction.Transactional;
@@ -16,15 +17,18 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
+    private final ProductCategoryRepository productCategoryRepository;
 
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository) {
+    public ProductServiceImpl(ProductRepository productRepository,
+           ProductCategoryRepository productCategoryRepository) {
         this.productRepository = productRepository;
+        this.productCategoryRepository = productCategoryRepository;
     }
 
 
     @Override
-    public List<Product> getAllProducts(){
+    public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
 
@@ -35,11 +39,14 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Page<Product> findByCategoryId(Long id, Pageable page) {
+        if(!productCategoryRepository.existsById(id)){
+            throw new NotFoundException("Category not found!");
+        }
         return productRepository.findByCategoryId(id, page);
     }
 
     @Override
-    public Page<Product> findByNameContaining(String name, Pageable page){
+    public Page<Product> findByNameContaining(String name, Pageable page) {
         return productRepository.findByNameContaining(name, page);
     }
 
@@ -61,11 +68,17 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void deleteProduct(Product product) {
+        if (product == null || !productRepository.existsById(product.getId())) {
+            throw new NotFoundException("Product was not found!");
+        }
         productRepository.delete(product);
     }
 
     @Override
     public void deleteProductById(Long id) {
+        if (!productRepository.existsById(id)) {
+            throw new NotFoundException("Product was not found!");
+        }
         productRepository.deleteById(id);
     }
 }
