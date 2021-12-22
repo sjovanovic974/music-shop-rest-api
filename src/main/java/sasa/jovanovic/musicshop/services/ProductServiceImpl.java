@@ -21,7 +21,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     public ProductServiceImpl(ProductRepository productRepository,
-           ProductCategoryRepository productCategoryRepository) {
+                              ProductCategoryRepository productCategoryRepository) {
         this.productRepository = productRepository;
         this.productCategoryRepository = productCategoryRepository;
     }
@@ -39,15 +39,25 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Page<Product> findByCategoryId(Long id, Pageable page) {
-        if(!productCategoryRepository.existsById(id)){
-            throw new NotFoundException("Category not found!");
+        Page<Product> products = productRepository.findByCategoryId(id, page);
+
+        if (products.getSize() == 0) {
+            throw new NotFoundException("No such category found!");
         }
-        return productRepository.findByCategoryId(id, page);
+
+        return products;
     }
 
     @Override
     public Page<Product> findByNameContaining(String name, Pageable page) {
-        return productRepository.findByNameContaining(name, page);
+
+        Page<Product> products = productRepository.findByNameContaining(name, page);
+
+        if (products.getSize() == 0) {
+            throw new NotFoundException("No products found!");
+        }
+
+        return products;
     }
 
     @Override
@@ -63,22 +73,25 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product updateProduct(Product product) {
+        productRepository.findById(product.getId())
+                .orElseThrow(() -> new NotFoundException("Product was not found!"));
+
         return productRepository.save(product);
     }
 
     @Override
     public void deleteProduct(Product product) {
-        if (product == null || !productRepository.existsById(product.getId())) {
-            throw new NotFoundException("Product was not found!");
-        }
+        productRepository.findById(product.getId())
+                .orElseThrow(() -> new NotFoundException("Product was not found!"));
+
         productRepository.delete(product);
     }
 
     @Override
     public void deleteProductById(Long id) {
-        if (!productRepository.existsById(id)) {
-            throw new NotFoundException("Product was not found!");
-        }
+        productRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Product was not found!"));
+
         productRepository.deleteById(id);
     }
 }
