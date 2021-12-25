@@ -32,7 +32,7 @@ class ProductRepositoryTest {
 
     @Test
     void findByCategoryId() {
-
+        // NE valja
         Pageable page = PageRequest.of(0, 10);
         Page<Product> products = new PageImpl<>(tempList, page, tempList.size());
 

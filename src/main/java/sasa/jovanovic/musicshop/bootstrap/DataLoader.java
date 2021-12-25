@@ -2,6 +2,7 @@ package sasa.jovanovic.musicshop.bootstrap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import sasa.jovanovic.musicshop.models.Product;
 import sasa.jovanovic.musicshop.models.ProductCategory;
@@ -11,6 +12,7 @@ import sasa.jovanovic.musicshop.services.ProductService;
 import java.math.BigDecimal;
 
 @Component
+@Profile("test")
 public class DataLoader implements CommandLineRunner {
 
     private final ProductService productService;
@@ -21,18 +23,13 @@ public class DataLoader implements CommandLineRunner {
         this.productService = productService;
         this.productCategoryService = productCategoryService;
     }
-    
+
     @Override
     public void run(String... args) throws Exception {
-
-        int count = productService.getAllProducts().size();
-
-        if(count == 0) {
-            loadData();
-        }
+        loadData();
     }
 
-    private void loadData(){
+    private void loadData() {
 
         ProductCategory cds = new ProductCategory();
         cds.setCategoryName("CD");
@@ -74,7 +71,7 @@ public class DataLoader implements CommandLineRunner {
         cd3.setCategory(cds);
 
         productService.saveProduct(cd3);
-        
+
 
         ProductCategory vinyls = new ProductCategory();
         vinyls.setCategoryName("Vinyl");
@@ -158,12 +155,12 @@ public class DataLoader implements CommandLineRunner {
 
         productService.saveProduct(d3);
 
-        
+
         ProductCategory books = new ProductCategory();
         books.setCategoryName("Book");
 
         productCategoryService.saveProductCategory(books);
-        
+
         Product b1 = new Product();
         b1.setSku("bk000001");
         b1.setName("Iron Maiden: True Story");
