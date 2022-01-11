@@ -4,6 +4,9 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Objects;
@@ -17,25 +20,31 @@ public class Product {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "sku")
+    @Column(name = "sku", unique = true)
+    @NotBlank(message = "Sku is mandatory")
     private String sku;
 
     @Column(name = "name")
+    @NotBlank(message = "Name is mandatory")
     private String name;
 
     @Column(name = "description")
+    @Lob
     private String description;
 
     @Column(name = "unit_price")
+    @Min(value = 0)
     private BigDecimal unitPrice;
 
     @Column(name = "image_url")
     private String imageUrl;
 
     @Column(name = "active")
+    @NotNull
     private boolean active;
 
     @Column(name = "units_in_stock")
+    @Min(value = 0)
     private int unitsInStock;
 
     @Column(name = "date_created")
@@ -47,7 +56,8 @@ public class Product {
     private Date lastUpdated;
 
     @ManyToOne
-    @JoinColumn(name="category_id", nullable = false)
+    @JoinColumn(name="category_id")
+    @NotNull
     private ProductCategory category;
 
     public Product() {

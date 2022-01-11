@@ -12,7 +12,7 @@ import sasa.jovanovic.musicshop.services.ProductService;
 import java.math.BigDecimal;
 
 @Component
-@Profile("test")
+@Profile("default")
 public class DataLoader implements CommandLineRunner {
 
     private final ProductService productService;

@@ -19,6 +19,7 @@ import sasa.jovanovic.musicshop.repos.ProductRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import static org.mockito.Mockito.*;
@@ -148,7 +149,7 @@ class ProductServiceImplUnitTest {
         Product savedProduct = service.saveProduct(product);
 
         Assertions.assertNotNull(savedProduct);
-        Assertions.assertTrue(savedProduct.getId() == product.getId());
+        Assertions.assertTrue(Objects.equals(savedProduct.getId(), product.getId()));
         verify(productRepository, times(1)).save(any());
     }
 

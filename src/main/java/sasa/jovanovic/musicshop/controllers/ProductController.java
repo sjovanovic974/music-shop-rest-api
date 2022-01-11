@@ -3,9 +3,12 @@ package sasa.jovanovic.musicshop.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import sasa.jovanovic.musicshop.models.Product;
 import sasa.jovanovic.musicshop.services.ProductService;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("products")
@@ -39,13 +42,14 @@ public class ProductController {
     }
 
     @PostMapping
-    public Product saveProduct(@RequestBody Product product){
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public Product saveProduct(@Valid @RequestBody Product product){
         return productService.saveProduct(product);
     }
 
     @PutMapping
     public Product updateProduct(@RequestBody Product product){
-        return productService.saveProduct(product);
+        return productService.updateProduct(product);
     }
 
     @DeleteMapping
