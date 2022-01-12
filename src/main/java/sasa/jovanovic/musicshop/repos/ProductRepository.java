@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import sasa.jovanovic.musicshop.models.Product;
 
 @Repository
-@CrossOrigin
+@CrossOrigin("http://localhost:4200")
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Page<Product> findByCategoryId(Long id, Pageable page);
