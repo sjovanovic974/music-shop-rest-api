@@ -41,7 +41,7 @@ public class DataLoader implements CommandLineRunner {
         cd1.setName("Metallica: Master of puppets");
         cd1.setDescription("3rd album");
         cd1.setUnitPrice(new BigDecimal("19.99"));
-        cd1.setImageUrl("img/0001");
+        cd1.setImageUrl("assets/images/placeholder.png");
         cd1.setActive(true);
         cd1.setUnitsInStock(20);
         cd1.setCategory(cds);
@@ -53,7 +53,7 @@ public class DataLoader implements CommandLineRunner {
         cd2.setName("Iron Maiden: Powerslave");
         cd2.setDescription("Master Piece");
         cd2.setUnitPrice(new BigDecimal("19.99"));
-        cd2.setImageUrl("img/0002");
+        cd2.setImageUrl("assets/images/placeholder.png");
         cd2.setActive(true);
         cd2.setUnitsInStock(15);
         cd2.setCategory(cds);
@@ -65,7 +65,7 @@ public class DataLoader implements CommandLineRunner {
         cd3.setName("Guns'n'Roses: Appetite for Destruction");
         cd3.setDescription("Powerful Debut");
         cd3.setUnitPrice(new BigDecimal("19.99"));
-        cd3.setImageUrl("img/0003");
+        cd3.setImageUrl("assets/images/placeholder.png");
         cd3.setActive(true);
         cd3.setUnitsInStock(18);
         cd3.setCategory(cds);
@@ -83,7 +83,7 @@ public class DataLoader implements CommandLineRunner {
         v1.setName("Iron Maiden: Rock in Rio");
         v1.setDescription("Double Live LP");
         v1.setUnitPrice(new BigDecimal("44.99"));
-        v1.setImageUrl("img/0004");
+        v1.setImageUrl("assets/images/placeholder.png");
         v1.setActive(true);
         v1.setUnitsInStock(10);
         v1.setCategory(vinyls);
@@ -95,7 +95,7 @@ public class DataLoader implements CommandLineRunner {
         v2.setName("Slayer: South of Heaven");
         v2.setDescription("Classic Thrash Album");
         v2.setUnitPrice(new BigDecimal("23.99"));
-        v2.setImageUrl("img/0005");
+        v2.setImageUrl("assets/images/placeholder.png");
         v2.setActive(true);
         v2.setUnitsInStock(10);
         v2.setCategory(vinyls);
@@ -107,7 +107,7 @@ public class DataLoader implements CommandLineRunner {
         v3.setName("Metallica: And Justice for All");
         v3.setDescription("Double LP");
         v3.setUnitPrice(new BigDecimal("44.99"));
-        v3.setImageUrl("img/0006");
+        v3.setImageUrl("assets/images/placeholder.png");
         v3.setActive(true);
         v3.setUnitsInStock(10);
         v3.setCategory(vinyls);
@@ -124,7 +124,7 @@ public class DataLoader implements CommandLineRunner {
         d1.setName("Iron Maiden: The Early Years");
         d1.setDescription("Early History of the famous HM band");
         d1.setUnitPrice(new BigDecimal("14.99"));
-        d1.setImageUrl("img/0007");
+        d1.setImageUrl("assets/images/placeholder.png");
         d1.setActive(true);
         d1.setUnitsInStock(10);
         d1.setCategory(dvds);
@@ -136,7 +136,7 @@ public class DataLoader implements CommandLineRunner {
         d2.setName("Slayer: War at Warfield");
         d2.setDescription("Thrash Gods at their best");
         d2.setUnitPrice(new BigDecimal("14.99"));
-        d2.setImageUrl("img/0008");
+        d2.setImageUrl("assets/images/placeholder.png");
         d2.setActive(true);
         d2.setUnitsInStock(10);
         d2.setCategory(dvds);
@@ -148,7 +148,7 @@ public class DataLoader implements CommandLineRunner {
         d3.setName("Iron Maiden: Death on the Road");
         d3.setDescription("HM legends");
         d3.setUnitPrice(new BigDecimal("14.99"));
-        d3.setImageUrl("img/0008");
+        d3.setImageUrl("assets/images/placeholder.png");
         d3.setActive(true);
         d3.setUnitsInStock(10);
         d3.setCategory(dvds);
@@ -166,7 +166,7 @@ public class DataLoader implements CommandLineRunner {
         b1.setName("Iron Maiden: True Story");
         b1.setDescription("From the men who were there");
         b1.setUnitPrice(new BigDecimal("9.99"));
-        b1.setImageUrl("img/0010");
+        b1.setImageUrl("assets/images/placeholder.png");
         b1.setActive(true);
         b1.setUnitsInStock(10);
         b1.setCategory(books);
@@ -178,7 +178,7 @@ public class DataLoader implements CommandLineRunner {
         b2.setName("Metallica: For whom the bells toll");
         b2.setDescription("The early years");
         b2.setUnitPrice(new BigDecimal("9.99"));
-        b2.setImageUrl("img/0011");
+        b2.setImageUrl("assets/images/placeholder.png");
         b2.setActive(true);
         b2.setUnitsInStock(10);
         b2.setCategory(books);
@@ -190,7 +190,7 @@ public class DataLoader implements CommandLineRunner {
         b3.setName("Ramones: Gabba Gabba Hey");
         b3.setDescription("RnR music was never the same");
         b3.setUnitPrice(new BigDecimal("9.99"));
-        b3.setImageUrl("img/0012");
+        b3.setImageUrl("assets/images/placeholder.png");
         b3.setActive(true);
         b3.setUnitsInStock(5);
         b3.setCategory(books);
