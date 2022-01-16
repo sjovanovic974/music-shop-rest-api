@@ -38,16 +38,25 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 
     @Override
     public ProductCategory updateProductCategory(ProductCategory productCategory) {
+        productCategoryRepository.findById(productCategory.getId())
+                .orElseThrow(() -> new NotFoundException("Product was not found!"));
+
         return productCategoryRepository.save(productCategory);
     }
 
     @Override
     public void deleteProductCategory(ProductCategory productCategory) {
+        productCategoryRepository.findById(productCategory.getId())
+                .orElseThrow(() -> new NotFoundException("Product was not found!"));
+
         productCategoryRepository.delete(productCategory);
     }
 
     @Override
     public void deleteProductCategoryById(Long id) {
+        productCategoryRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Product was not found!"));
+
         productCategoryRepository.deleteById(id);
     }
 }
