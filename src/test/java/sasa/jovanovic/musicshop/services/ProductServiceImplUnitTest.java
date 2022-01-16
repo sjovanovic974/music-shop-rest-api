@@ -106,14 +106,14 @@ class ProductServiceImplUnitTest {
         Page<Product> products = new PageImpl<>(tempList, page, tempList.size());
         String argument = "Maiden";
 
-        when(productRepository.findByNameContaining(argument, page)).thenReturn(products);
+        when(productRepository.findByNameContainingIgnoreCase(argument, page)).thenReturn(products);
 
-        Page<Product> returnedProducts = productRepository.findByNameContaining(argument, page);
+        Page<Product> returnedProducts = productRepository.findByNameContainingIgnoreCase(argument, page);
 
         String returnedProductName = returnedProducts.getContent().get(0).getName();
 
         Assertions.assertTrue(returnedProductName.contains(argument));
-        verify(productRepository, times(1)).findByNameContaining(argument, page);
+        verify(productRepository, times(1)).findByNameContainingIgnoreCase(argument, page);
     }
 
     @Test

@@ -117,7 +117,7 @@ class ProductRepositoryIT {
 
         Pageable page = PageRequest.of(0, 10);
 
-        Page<Product> returnedProducts = repository.findByNameContaining("Met", page);
+        Page<Product> returnedProducts = repository.findByNameContainingIgnoreCase("Met", page);
 
         Assertions.assertNotNull(returnedProducts);
         Assertions.assertEquals(expected, returnedProducts.getContent().size());

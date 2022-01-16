@@ -6,7 +6,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import sasa.jovanovic.musicshop.errorhandling.NotFoundException;
 import sasa.jovanovic.musicshop.models.Product;
-import sasa.jovanovic.musicshop.repos.ProductCategoryRepository;
 import sasa.jovanovic.musicshop.repos.ProductRepository;
 
 import javax.transaction.Transactional;
@@ -17,13 +16,10 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
-    private final ProductCategoryRepository productCategoryRepository;
 
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository,
-                              ProductCategoryRepository productCategoryRepository) {
+    public ProductServiceImpl(ProductRepository productRepository) {
         this.productRepository = productRepository;
-        this.productCategoryRepository = productCategoryRepository;
     }
 
 
@@ -51,7 +47,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Page<Product> findByNameContaining(String name, Pageable page) {
 
-        Page<Product> products = productRepository.findByNameContaining(name, page);
+        Page<Product> products = productRepository.findByNameContainingIgnoreCase(name, page);
 
         if (products.getSize() == 0) {
             throw new NotFoundException("No products found!");
