@@ -73,7 +73,7 @@
 
 	<scm>
 		<url>https://github.com/sjovanovic974/music-shop-rest-api.git</url>
-		<developerConnection>scm:git:git@github.com:sjovanovic974/music-shop-rest-api.git</developerConnection>
+		<developerConnection>scm:git:https://github.com/sjovanovic974/music-shop-rest-api.git</developerConnection>
 	  <tag>music-shop-0.0.1</tag>
   </scm>
 
