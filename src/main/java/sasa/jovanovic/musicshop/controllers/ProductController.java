@@ -33,7 +33,7 @@ public class ProductController {
 
     @GetMapping("/search")
     public Page<Product> getProducts(@RequestParam("name") String name, Pageable page){
-        return productService.findByNameContaining(name, page);
+        return productService.findByNameContainingIgnoreCase(name, page);
     }
 
     @GetMapping("/{id}")

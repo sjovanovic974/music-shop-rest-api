@@ -14,7 +14,7 @@ public interface ProductService {
 
     Page<Product> findByCategoryId(Long id, Pageable page);
 
-    Page<Product> findByNameContaining(String name, Pageable page);
+    Page<Product> findByNameContainingIgnoreCase(String name, Pageable page);
 
     Product getProductById(Long id);
 

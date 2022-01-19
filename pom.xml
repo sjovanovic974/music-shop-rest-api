@@ -15,7 +15,21 @@
 	<description>Spring Boot REST API for music shop</description>
 	<properties>
 		<java.version>11</java.version>
+		<maven.compiler.plugin>3.8.1</maven.compiler.plugin>
+		<maven.compiler.source>3.8.1</maven.compiler.source>
+		<encoding>UTF-8</encoding>
+		<project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>${encoding}</project.reporting.outputEncoding>
+		<project.resources.sourceEncoding>${encoding}</project.resources.sourceEncoding>
+		<archetype.encoding>${encoding}</archetype.encoding>
 	</properties>
+
+	<scm>
+		<connection>scm:git:git@github.com:sjovanovic974/music-shop-rest-api.git</connection>
+		<developerConnection>scm:git:git@github.com:sjovanovic974/music-shop-rest-api.git</developerConnection>
+		<url>https://github.com/sjovanovic974/music-shop-rest-api</url>
+		<tag>v@{project.version}</tag>
+	</scm>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -55,8 +69,9 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5.3</version>
 			</plugin>
 		</plugins>
 	</build>
