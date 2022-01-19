@@ -6,3 +6,5 @@ This is my first solo shot at making full stack app i.e. eCommerce Music Shop. H
 There is off course frontend which is made in Angular that comminicates with this API and renders views for a customer.
 
 Wish me luck the journey begins :)
+
+19.01.2022.
