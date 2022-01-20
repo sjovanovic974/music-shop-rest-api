@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>sasa.jovanovic</groupId>
 	<artifactId>music-shop</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>music-shop</name>
 	<description>Spring Boot REST API for music shop</description>
 	<properties>
@@ -66,6 +66,9 @@
 				<version>2.5.3</version>
 				<configuration>
 					<goals>install</goals>
+					<checkModificationExcludes>
+						<checkModificationExclude>pom.xml</checkModificationExclude>
+					</checkModificationExcludes>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -73,7 +76,8 @@
 
 	<scm>
 		<url>https://github.com/sjovanovic974/music-shop-rest-api.git</url>
-		<developerConnection>scm:git:https://github.com/sjovanovic974/music-shop-rest-api.git</developerConnection>
+		<connection>scm:git:git@github.com:sjovanovic974/music-shop-rest-api.git</connection>
+		<developerConnection>scm:git:git@github.com:sjovanovic974/music-shop-rest-api.git</developerConnection>
 	  <tag>music-shop-0.0.1</tag>
   </scm>
 
