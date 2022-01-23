@@ -42,5 +42,4 @@ class MusicShopApplicationTests {
 		Assertions.assertThat(productCategoryService).isNotNull();
 		Assertions.assertThat(productService).isNotNull();
 	}
-
 }

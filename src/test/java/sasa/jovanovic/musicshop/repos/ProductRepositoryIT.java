@@ -9,17 +9,19 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import sasa.jovanovic.musicshop.models.Product;
+import sasa.jovanovic.musicshop.models.ProductCategory;
 
 import javax.persistence.EntityManager;
 import javax.sql.DataSource;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @ActiveProfiles("DEV")
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 class ProductRepositoryIT {
 
     @Autowired
@@ -66,9 +68,7 @@ class ProductRepositoryIT {
 
         Page<Product> returnedProducts = repository.findByCategoryId(99L, page);
 
-        Assertions.assertNotNull(returnedProducts);
         Assertions.assertEquals(expected, returnedProducts.getContent().size());
-
     }
 
     @Test
@@ -81,5 +81,28 @@ class ProductRepositoryIT {
 
         Assertions.assertNotNull(returnedProducts);
         Assertions.assertEquals(expected, returnedProducts.getContent().size());
+    }
+
+    @Test
+    void totalEntries() {
+        long expected = repository.count();
+
+        List<Product> returnedProducts = repository.findAll();
+
+        Assertions.assertNotNull(returnedProducts);
+        Assertions.assertEquals(expected, returnedProducts.size());
+    }
+
+    @Test
+    void addEntry() {
+        long countBefore = categoryRepository.count();
+
+        ProductCategory blueRay = new ProductCategory();
+        blueRay.setCategoryName("Blue Ray");
+        categoryRepository.save(blueRay);
+
+        long countAfter = categoryRepository.count();
+
+        assertThat(countBefore).isLessThan(countAfter);
     }
 }
