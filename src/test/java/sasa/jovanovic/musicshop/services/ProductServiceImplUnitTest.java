@@ -41,7 +41,6 @@ class ProductServiceImplUnitTest {
 
     @BeforeEach
     public void setUp() {
-        //service = new ProductServiceImpl(productRepository, productCategoryRepository);
         product = new Product();
         tempList = new ArrayList<>();
     }

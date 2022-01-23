@@ -68,6 +68,7 @@ class ProductControllerTest {
         p2.setId(2L);
         p2.setCategory(vinyl);
         p2.setName("Iron Maiden: Live After Death");
+        p2.setImageUrl("path");
 
         productsList.add(p1);
         productsList.add(p2);
