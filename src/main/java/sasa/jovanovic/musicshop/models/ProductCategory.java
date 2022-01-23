@@ -1,6 +1,7 @@
 package sasa.jovanovic.musicshop.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "product_category")
@@ -11,7 +12,8 @@ public class ProductCategory {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "category_name")
+    @Column(name = "category_name", nullable = false)
+    @NotBlank(message = "Category name is mandatory")
     private String categoryName;
 
 

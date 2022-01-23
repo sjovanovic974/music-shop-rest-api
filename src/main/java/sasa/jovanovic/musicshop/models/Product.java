@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name="product")
+@Table(name = "product")
 public class Product {
 
     @Id
@@ -20,30 +20,30 @@ public class Product {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "sku", unique = true)
+    @Column(name = "sku", unique = true, nullable = false)
     @NotBlank(message = "Sku is mandatory")
     private String sku;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     @NotBlank(message = "Name is mandatory")
     private String name;
 
     @Column(name = "description")
-    @Lob
     private String description;
 
-    @Column(name = "unit_price")
+    @Column(name = "unit_price", nullable = false)
     @Min(value = 0)
     private BigDecimal unitPrice;
 
-    @Column(name = "image_url")
+    @Column(name = "image_url", nullable = false)
+    @NotNull
     private String imageUrl;
 
-    @Column(name = "active")
+    @Column(name = "active", nullable = false)
     @NotNull
     private boolean active;
 
-    @Column(name = "units_in_stock")
+    @Column(name = "units_in_stock", nullable = false)
     @Min(value = 0)
     private int unitsInStock;
 
@@ -56,7 +56,7 @@ public class Product {
     private Date lastUpdated;
 
     @ManyToOne
-    @JoinColumn(name="category_id")
+    @JoinColumn(name = "category_id")
     @NotNull
     private ProductCategory category;
 
