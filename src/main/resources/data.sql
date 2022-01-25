@@ -43,6 +43,68 @@ VALUES ('cd000003',
         18,
         1);
         
+INSERT INTO `product` (sku, name, description, unit_price, image_url, units_in_stock,category_id)
+VALUES ('cd000004',
+		'Metallica: Kill \'em all',
+        'Kill \'Em All is the debut studio album by American heavy metal band Metallica, released on July 25, 1983,[1] through the independent label Megaforce Records. ',
+        19.99,
+        'assets/images/cd/metallica-kill-em-all.jpg',
+        11,
+        1);
+
+INSERT INTO `product` (sku, name, description, unit_price, image_url, units_in_stock,category_id)
+VALUES ('cd000005',
+		'Slayer: Hell Awaits',
+        'Hell Awaits is the second studio album by American thrash metal band Slayer, released in March 1985 by Metal Blade Records.',
+        15.99,
+        'assets/images/cd/slayer-hell-awaits.jpg',
+        11,
+        1);
+
+INSERT INTO `product` (sku, name, description, unit_price, image_url, units_in_stock,category_id)
+VALUES ('cd000006',
+		'Iron Maiden: The Number of the Beast',
+        'The Number of the Beast is the third studio album by English heavy metal band Iron Maiden. It was released on 22 March 1982 in the United Kingdom by EMI Records and in the United States by Harvest and Capitol Records. The album was their first to feature vocalist Bruce Dickinson and their last with drummer Clive Burr.',
+        19.99,
+        'assets/images/cd/iron-maiden-the-number-of-the-beast.jpg',
+        11,
+        1);
+
+INSERT INTO `product` (sku, name, description, unit_price, image_url, units_in_stock,category_id)
+VALUES ('cd000007',
+		'Metallica: Ride the Lightning',
+        'Ride the Lightning is the second studio album by American heavy metal band Metallica, released on July 27, 1984, by the independent record label Megaforce Records. The album was recorded in three weeks with producer Flemming Rasmussen at Sweet Silence Studios in Copenhagen, Denmark.',
+        19.99,
+        'assets/images/cd/metallica-ride-the-lightning.jpg',
+        8,
+        1);
+
+INSERT INTO `product` (sku, name, description, unit_price, image_url, units_in_stock,category_id)
+VALUES ('cd000008',
+		'Guns \'n\' Roses: Use Your Illusion I',
+        'Use Your Illusion I is the third studio album by American hard rock band Guns N\' Roses, released on September 17, 1991, the same day as its counterpart Use Your Illusion II.',
+        19.99,
+        'assets/images/cd/guns-n-roses-use-your-illusion-1.jpg',
+        6,
+        1);
+
+INSERT INTO `product` (sku, name, description, unit_price, image_url, units_in_stock,category_id)
+VALUES ('cd000009',
+		'Guns \'n\' Roses: Use Your Illusion II',
+        'Use Your Illusion II is the fourth studio album by the American hard rock band Guns N\' Roses. The album was released on September 17, 1991, the same day as its counterpart Use Your Illusion I. ',
+        19.99,
+        'assets/images/cd/guns-n-roses-use-your-illusion-2.jpg',
+        7,
+        1);
+
+INSERT INTO `product` (sku, name, description, unit_price, image_url, units_in_stock,category_id)
+VALUES ('cd000010',
+		'Pantera: Cowboys from Hell',
+        'Cowboys from Hell is the fifth studio album by American heavy metal band Pantera, released on July 24, 1990 by Atco Records. It marked the band\'s major label debut and their first collaboration with producer Terry Date. It is considered one of the first ever groove metal albums',
+        19.99,
+        'assets/images/cd/pantera-cowboys-from-hell.jpg',
+        5,
+        1);
 -- -----------------------------------------------------
 -- >>>>>>>> VINYL
 -- -----------------------------------------------------
