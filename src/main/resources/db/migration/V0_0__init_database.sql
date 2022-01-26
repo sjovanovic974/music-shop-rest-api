@@ -1,10 +1,6 @@
 -- -----------------------------------------------------
--- Dropping tables if they exist. order is important 
--- because of foreign keys
+-- DDL Statements
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `my-music-shop-app`.`product`;
-DROP TABLE IF EXISTS `my-music-shop-app`.`product_category`;
-
 -- -----------------------------------------------------
 -- Table `my-music-shop-app`.`product_category`
 -- -----------------------------------------------------
@@ -36,6 +32,3 @@ CREATE TABLE `my-music-shop-app`.`product` (
 ) 
 ENGINE=InnoDB
 AUTO_INCREMENT = 1;
-
-
-
