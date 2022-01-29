@@ -54,7 +54,7 @@ class ProductRepositoryIT {
 
         Pageable page = PageRequest.of(0, 10);
 
-        Page<Product> returnedProducts = repository.findByCategoryId(1L, page);
+        Page<Product> returnedProducts = repository.findByCategoryId(2L, page);
 
         Assertions.assertNotNull(returnedProducts);
         Assertions.assertEquals(expected, returnedProducts.getContent().size());
