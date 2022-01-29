@@ -19,7 +19,6 @@ import sasa.jovanovic.musicshop.repos.ProductRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 import static org.mockito.Mockito.*;
@@ -141,14 +140,19 @@ class ProductServiceImplUnitTest {
 
     @Test
     void saveProduct() {
-        product.setId(1L);
+        ProductCategory category = new ProductCategory();
+        Long id = 1L;
+        category.setId(id);
 
-        when(productRepository.save(any())).thenReturn(product);
+        product.setId(1L);
+        product.setSku("CD000011");
+        product.setCategory(category);
+
+        when(productRepository.save(any(Product.class))).thenReturn(product);
 
         Product savedProduct = service.saveProduct(product);
 
         Assertions.assertNotNull(savedProduct);
-        Assertions.assertTrue(Objects.equals(savedProduct.getId(), product.getId()));
         verify(productRepository, times(1)).save(any());
     }
 

@@ -64,6 +64,19 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product saveProduct(Product product) {
+
+        Product lastSaved = productRepository.findTopByCategoryOrderByIdDesc(product.getCategory()).
+                orElse(null);
+
+        String nextSku = product.getCategory().getCategoryName() + "000001";
+
+        if(lastSaved != null) {
+            String currentSku = lastSaved.getSku().substring(2);
+            Integer number = (Integer.parseInt(currentSku)) + 1;
+            nextSku = product.getCategory().getCategoryName() + String.format("%06d", number);
+        }
+
+        product.setSku(nextSku);
         return productRepository.save(product);
     }
 

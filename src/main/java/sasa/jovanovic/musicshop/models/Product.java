@@ -21,7 +21,6 @@ public class Product {
     private Long id;
 
     @Column(name = "sku", unique = true, nullable = false)
-    @NotBlank(message = "Sku is mandatory")
     private String sku;
 
     @Column(name = "name", nullable = false)
