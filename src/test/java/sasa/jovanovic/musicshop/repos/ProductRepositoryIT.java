@@ -105,4 +105,23 @@ class ProductRepositoryIT {
 
         assertThat(countBefore).isLessThan(countAfter);
     }
+
+    @Test
+    void findLastEntryByCategory() {
+        ProductCategory cd = categoryRepository.getById(1L);
+        ProductCategory vinyl = categoryRepository.getById(2L);
+
+
+        Product product = repository.findTopByCategoryOrderByIdDesc(
+                cd).orElse(null);
+
+        assertThat(product).isNotNull();
+        assertThat(product.getSku()).isEqualTo("CD000010");
+
+        Product product2 = repository.findTopByCategoryOrderByIdDesc(
+                vinyl).orElse(null);
+
+        assertThat(product2).isNotNull();
+        assertThat(product2.getSku()).isEqualTo("VL000003");
+    }
 }
