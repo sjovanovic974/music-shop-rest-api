@@ -1,5 +1,8 @@
 package sasa.jovanovic.musicshop.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -9,9 +12,11 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Objects;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "product")
 public class Product {
 
@@ -59,124 +64,11 @@ public class Product {
     @NotNull
     private ProductCategory category;
 
-    public Product() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getSku() {
-        return sku;
-    }
-
-    public void setSku(String sku) {
-        this.sku = sku;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public BigDecimal getUnitPrice() {
-        return unitPrice;
-    }
-
-    public void setUnitPrice(BigDecimal unitPrice) {
-        this.unitPrice = unitPrice;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public int getUnitsInStock() {
-        return unitsInStock;
-    }
-
-    public void setUnitsInStock(int unitsInStock) {
-        this.unitsInStock = unitsInStock;
-    }
-
-    public Date getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
-    public Date getLastUpdated() {
-        return lastUpdated;
-    }
-
-    public void setLastUpdated(Date lastUpdated) {
-        this.lastUpdated = lastUpdated;
-    }
-
-    public ProductCategory getCategory() {
-        return category;
-    }
-
-    public void setCategory(ProductCategory category) {
-        this.category = category;
-    }
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", sku='" + sku + '\'' +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", unitPrice=" + unitPrice +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", active=" + active +
-                ", unitsInStock=" + unitsInStock +
-                ", dateCreated=" + dateCreated +
-                ", lastUpdated=" + lastUpdated +
-                ", category=" + category +
-                '}';
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Product)) return false;
         Product product = (Product) o;
         return id.equals(product.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
     }
 }

@@ -122,6 +122,6 @@ class ProductRepositoryIT {
                 vinyl).orElse(null);
 
         assertThat(product2).isNotNull();
-        assertThat(product2.getSku()).isEqualTo("VL000003");
+        assertThat(product2.getSku()).isEqualTo("LP000003");
     }
 }

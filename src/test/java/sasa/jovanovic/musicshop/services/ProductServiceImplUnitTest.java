@@ -158,21 +158,27 @@ class ProductServiceImplUnitTest {
 
     @Test
     void updateProduct() {
+        ProductCategory cd = new ProductCategory();
+        Long id = 1L;
+        cd.setId(id);
+        cd.setCategoryName("CD");
+
+        product.setCategory(cd);
         product.setId(99L);
         product.setName("test");
 
-        when(productRepository.save(product)).thenReturn(product);
+        when(productRepository.save(any(Product.class))).thenReturn(product);
         Product savedProduct = service.saveProduct(product);
 
         savedProduct.setName("new test");
 
         when(productRepository.findById(savedProduct.getId())).thenReturn(Optional.of(savedProduct));
-        when(productRepository.save(savedProduct)).thenReturn(savedProduct);
+        when(productRepository.save(any(Product.class))).thenReturn(savedProduct);
 
         Product updatedProduct = service.updateProduct(savedProduct);
 
         Assertions.assertEquals(savedProduct.getId(), updatedProduct.getId());
-        Assertions.assertEquals(product.getName(), updatedProduct.getName());
+        Assertions.assertEquals(savedProduct.getName(), updatedProduct.getName());
 
         verify(productRepository, times(2)).save(any());
     }

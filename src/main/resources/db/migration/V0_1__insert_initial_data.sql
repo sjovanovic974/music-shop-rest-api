@@ -112,7 +112,7 @@ VALUES ('CD000010',
 -- >>>>>>>> VINYL
 -- -----------------------------------------------------
 INSERT INTO `product` (sku, name, description, unit_price, image_url, units_in_stock,category_id)
-VALUES ('VL000001',
+VALUES ('LP000001',
 		'Iron Maiden: Rock in Rio',
         'Rock in Rio is a live album and video by English heavy metal " +
                 "band Iron Maiden, recorded at the Rock in Rio festival, Brazil in 2001 on " +
@@ -124,7 +124,7 @@ VALUES ('VL000001',
         2);
 
 INSERT INTO `product` (sku, name, description, unit_price, image_url, units_in_stock,category_id)
-VALUES ('VL000002',
+VALUES ('LP000002',
 		'Slayer: South of Heaven',
         'South of Heaven is the fourth studio album by American thrash " +
                 "metal band Slayer, released on July 5, 1988 by Def Jam Recordings.',
@@ -134,7 +134,7 @@ VALUES ('VL000002',
         2);
 
 INSERT INTO `product` (sku, name, description, unit_price, image_url, units_in_stock,category_id)
-VALUES ('VL000003',
+VALUES ('LP000003',
 		'Metallica: And Justice for All',
         '...And Justice for All is the fourth studio album by American heavy " +
                 "metal band Metallica, released on September 7, 1988[4] by Elektra Records. It was " +

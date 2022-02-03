@@ -65,19 +65,27 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product saveProduct(Product product) {
 
-        Product lastSaved = productRepository.findTopByCategoryOrderByIdDesc(product.getCategory()).
-                orElse(null);
+        if(product.getSku() == null) {
+            String nextSku = product.getCategory().getCategoryName() + "000001";
 
-        String nextSku = product.getCategory().getCategoryName() + "000001";
+            Product lastSaved = productRepository.findTopByCategoryOrderByIdDesc(product.getCategory()).
+                    orElse(null);
 
-        if(lastSaved != null) {
-            String currentSku = lastSaved.getSku().substring(2);
-            Integer number = (Integer.parseInt(currentSku)) + 1;
-            nextSku = product.getCategory().getCategoryName() + String.format("%06d", number);
+            if (lastSaved != null) {
+                String categoryName = product.getCategory().getCategoryName();
+                String currentSkuNumber = lastSaved.getSku().substring(2);
+
+                nextSku = getNextSku(categoryName, currentSkuNumber);
+            }
+
+            product.setSku(nextSku);
         }
-
-        product.setSku(nextSku);
         return productRepository.save(product);
+    }
+
+    private String getNextSku(String categoryName, String currentSkuNumber) {
+        Integer number = (Integer.parseInt(currentSkuNumber)) + 1;
+        return categoryName + String.format("%06d", number);
     }
 
     @Override
