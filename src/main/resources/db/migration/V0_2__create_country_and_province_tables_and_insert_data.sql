@@ -4,9 +4,9 @@ SET foreign_key_checks = 0;
 -- Table structure for table `country`
 --
 
-DROP TABLE IF EXISTS `country`;
+DROP TABLE IF EXISTS `my-music-shop-app`.`country`;
 
-CREATE TABLE `country` (
+CREATE TABLE `my-music-shop-app`.`country` (
   `id` smallint unsigned NOT NULL,
   `code` varchar(2) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE `country` (
 -- Data for table `country`
 --
 
-INSERT INTO `country` VALUES
+INSERT INTO `my-music-shop-app`.`country` VALUES
 (1,'BR','Brazil'),
 (2,'CA','Canada'),
 (3,'DE','Germany'),
@@ -29,9 +29,9 @@ INSERT INTO `country` VALUES
 -- Table structure for table `state`
 --
 
-DROP TABLE IF EXISTS `state`;
+DROP TABLE IF EXISTS `my-music-shop-app`.`state`;
 
-CREATE TABLE `state` (
+CREATE TABLE `my-music-shop-app`.`state` (
   `id` smallint unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `country_id` smallint unsigned NOT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE `state` (
 -- Dumping data for table `state`
 --
 
-INSERT INTO `state` VALUES
+INSERT INTO `my-music-shop-app`.`state` VALUES
 (1,'Acre',1),
 (2,'Alagoas',1),
 (3,'Amapá',1),

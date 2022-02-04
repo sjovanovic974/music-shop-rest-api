@@ -1,5 +1,6 @@
 package sasa.jovanovic.musicshop.services;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sasa.jovanovic.musicshop.errorhandling.NotFoundException;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Service
 @Transactional
+@Slf4j
 public class ProductCategoryServiceImpl implements ProductCategoryService {
 
     private final ProductCategoryRepository productCategoryRepository;
@@ -27,8 +29,10 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 
     @Override
     public ProductCategory getProductCategoryById(Long id) {
-        return productCategoryRepository.findById(id).orElseThrow(
-                () -> new NotFoundException("Category doesn't exist!"));
+        return productCategoryRepository.findById(id).orElseThrow(() -> {
+            log.error("Category doesn't exist!");
+            return new NotFoundException("Category doesn't exist!");
+        });
     }
 
     @Override
@@ -39,7 +43,10 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     @Override
     public ProductCategory updateProductCategory(ProductCategory productCategory) {
         productCategoryRepository.findById(productCategory.getId())
-                .orElseThrow(() -> new NotFoundException("Product was not found!"));
+        .orElseThrow(() -> {
+            log.error("Product was not found!");
+            return new NotFoundException("Product was not found!");
+        });
 
         return productCategoryRepository.save(productCategory);
     }
@@ -47,7 +54,10 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     @Override
     public void deleteProductCategory(ProductCategory productCategory) {
         productCategoryRepository.findById(productCategory.getId())
-                .orElseThrow(() -> new NotFoundException("Product was not found!"));
+            .orElseThrow(() -> {
+                log.error("Product was not found!");
+                return new NotFoundException("Product was not found!");
+            });
 
         productCategoryRepository.delete(productCategory);
     }
@@ -55,7 +65,10 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     @Override
     public void deleteProductCategoryById(Long id) {
         productCategoryRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Product was not found!"));
+                .orElseThrow(() -> {
+                    log.error("Product was not found!");
+                    return new NotFoundException("Product was not found!");
+                });
 
         productCategoryRepository.deleteById(id);
     }

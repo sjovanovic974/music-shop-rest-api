@@ -1,5 +1,6 @@
 package sasa.jovanovic.musicshop.services;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @Service
 @Transactional
+@Slf4j
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
@@ -38,6 +40,7 @@ public class ProductServiceImpl implements ProductService {
         Page<Product> products = productRepository.findByCategoryId(id, page);
 
         if (products.getSize() == 0) {
+            log.error("No such category found!");
             throw new NotFoundException("No such category found!");
         }
 
@@ -50,6 +53,7 @@ public class ProductServiceImpl implements ProductService {
         Page<Product> products = productRepository.findByNameContainingIgnoreCase(name, page);
 
         if (products.getSize() == 0) {
+            log.error("No products found!");
             throw new NotFoundException("No products found!");
         }
 
@@ -59,7 +63,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product getProductById(Long id) {
         return productRepository.findById(id).orElseThrow(
-                () -> new NotFoundException("Product was not found!"));
+                () -> {
+                    log.error("Product was not found!");
+                    return new NotFoundException("Product was not found!");
+                });
     }
 
     @Override
@@ -91,7 +98,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product updateProduct(Product product) {
         productRepository.findById(product.getId())
-                .orElseThrow(() -> new NotFoundException("Product was not found!"));
+                .orElseThrow(() -> {
+                    log.error("Product was not found!");
+                    return new NotFoundException("Product was not found!");
+                });
 
         return productRepository.save(product);
     }
@@ -99,7 +109,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void deleteProduct(Product product) {
         productRepository.findById(product.getId())
-                .orElseThrow(() -> new NotFoundException("Product was not found!"));
+                .orElseThrow(() -> {
+                    log.error("Product was not found!");
+                    return new NotFoundException("Product was not found!");
+                });
 
         productRepository.delete(product);
     }
@@ -107,7 +120,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void deleteProductById(Long id) {
         productRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Product was not found!"));
+                .orElseThrow(() -> {
+                    log.error("Product was not found!");
+                    return new NotFoundException("Product was not found!");
+                });
 
         productRepository.deleteById(id);
     }
