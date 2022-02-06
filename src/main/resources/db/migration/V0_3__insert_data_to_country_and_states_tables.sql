@@ -1,18 +1,3 @@
-SET foreign_key_checks = 0;
-
---
--- Table structure for table `country`
---
-
-DROP TABLE IF EXISTS `my-music-shop-app`.`country`;
-
-CREATE TABLE `my-music-shop-app`.`country` (
-  `id` smallint unsigned NOT NULL,
-  `code` varchar(2) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB;
-
 --
 -- Data for table `country`
 --
@@ -24,21 +9,6 @@ INSERT INTO `my-music-shop-app`.`country` VALUES
 (4,'IN','India'),
 (5,'TR','Turkey'),
 (6,'US','United States');
-
---
--- Table structure for table `state`
---
-
-DROP TABLE IF EXISTS `my-music-shop-app`.`state`;
-
-CREATE TABLE `my-music-shop-app`.`state` (
-  `id` smallint unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `country_id` smallint unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_country` (`country_id`),
-  CONSTRAINT `fk_country` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1;
 
 --
 -- Dumping data for table `state`
@@ -268,5 +238,3 @@ INSERT INTO `my-music-shop-app`.`state` VALUES
 (221,'Yalova',5),
 (222,'Yozgat',5),
 (223,'Zonguldak',5);
-
-SET foreign_key_checks = 1;
