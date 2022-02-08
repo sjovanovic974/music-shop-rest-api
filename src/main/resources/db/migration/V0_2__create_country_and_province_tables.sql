@@ -3,9 +3,6 @@ SET foreign_key_checks = 0;
 --
 -- Table structure for table `country`
 --
-
-DROP TABLE IF EXISTS `my-music-shop-app`.`country`;
-
 CREATE TABLE `my-music-shop-app`.`country` (
   `id` smallint unsigned NOT NULL,
   `code` varchar(2) DEFAULT NULL,
@@ -16,8 +13,6 @@ CREATE TABLE `my-music-shop-app`.`country` (
 --
 -- Table structure for table `state`
 --
-
-DROP TABLE IF EXISTS `my-music-shop-app`.`state`;
 
 CREATE TABLE `my-music-shop-app`.`state` (
   `id` smallint unsigned NOT NULL AUTO_INCREMENT,
