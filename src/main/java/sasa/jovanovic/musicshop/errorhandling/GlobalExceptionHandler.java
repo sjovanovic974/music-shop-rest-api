@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler
+    @ExceptionHandler(value = {NotFoundException.class})
     public ResponseEntity<ErrorResponse> handleNotFoundException(NotFoundException exception){
 
         ErrorResponse error = new ErrorResponse();
@@ -20,7 +20,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler
+    @ExceptionHandler(value = {Exception.class})
     public ResponseEntity<ErrorResponse> handleException(Exception exception){
 
         ErrorResponse error = new ErrorResponse();
