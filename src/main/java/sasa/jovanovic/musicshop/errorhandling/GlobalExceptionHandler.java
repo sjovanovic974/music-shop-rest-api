@@ -5,6 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.time.LocalDateTime;
+
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -15,7 +17,7 @@ public class GlobalExceptionHandler {
 
         error.setStatus(HttpStatus.NOT_FOUND.value());
         error.setMessage(exception.getMessage());
-        error.setTimeStamp(System.currentTimeMillis());
+        error.setTimeStamp(LocalDateTime.now().toString());
 
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
@@ -27,7 +29,7 @@ public class GlobalExceptionHandler {
 
         error.setStatus(HttpStatus.BAD_REQUEST.value());
         error.setMessage(exception.getMessage());
-        error.setTimeStamp(System.currentTimeMillis());
+        error.setTimeStamp(LocalDateTime.now().toString());
 
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
