@@ -1,6 +1,7 @@
 package sasa.jovanovic.musicshop.models;
 
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -21,5 +22,6 @@ public class ProductCategory {
 
     @Column(name = "category_name", nullable = false)
     @NotBlank(message = "Category name is mandatory")
+    @Length(min = 2)
     private String categoryName;
 }

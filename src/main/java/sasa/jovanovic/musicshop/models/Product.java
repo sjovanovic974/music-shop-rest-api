@@ -6,6 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -37,7 +38,7 @@ public class Product {
     private String description;
 
     @Column(name = "unit_price", nullable = false)
-    @Min(value = 0)
+    @DecimalMin(value="0.00", inclusive=true)
     private BigDecimal unitPrice;
 
     @Column(name = "image_url", nullable = false)

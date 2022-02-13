@@ -8,6 +8,8 @@ import sasa.jovanovic.musicshop.dto.Purchase;
 import sasa.jovanovic.musicshop.dto.PurchaseResponse;
 import sasa.jovanovic.musicshop.services.CheckoutService;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("checkout")
 public class CheckoutController {
@@ -19,7 +21,7 @@ public class CheckoutController {
     }
 
     @PostMapping("/purchase")
-    public PurchaseResponse placeOrder(@RequestBody Purchase purchase) {
+    public PurchaseResponse placeOrder(@Valid @RequestBody Purchase purchase) {
 
         return checkoutService.placeOrder(purchase);
 
