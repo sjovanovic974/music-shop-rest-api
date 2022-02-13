@@ -14,9 +14,9 @@ public class DBClean {
     @Bean
     public FlywayMigrationStrategy clean(){
         return flyway -> {
-            log.info("Dropping tables from DB");
+            log.info(">>> Dropping tables from DB");
             flyway.clean();
-            log.info("Recreating tables and inserting data to DB");
+            log.info(">>> Recreating tables and inserting data to DB");
             flyway.migrate();
         };
     }

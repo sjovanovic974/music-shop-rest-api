@@ -1,6 +1,8 @@
 package sasa.jovanovic.musicshop.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -15,6 +17,8 @@ import java.util.Set;
 @Table(name = "orders")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Order {
 
     @Id
@@ -22,9 +26,16 @@ public class Order {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "order_tracking_number", nullable = false)
     private String orderTrackingNumber;
+
+    @Column(name = "total_quantity", nullable = false)
     private int totalQuantity;
+
+    @Column(name = "total_price", nullable = false)
     private BigDecimal totalPrice;
+
+    @Column(name = "status", nullable = false)
     private String status;
 
     @CreationTimestamp
@@ -37,7 +48,7 @@ public class Order {
     private Set<OrderItem> orderItems = new HashSet<>();
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer customer;
 
     @OneToOne(cascade = CascadeType.ALL)

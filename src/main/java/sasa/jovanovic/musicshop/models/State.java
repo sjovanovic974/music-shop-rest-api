@@ -1,13 +1,17 @@
 package sasa.jovanovic.musicshop.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name="state")
-@Data
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class State {
 
     @Id
@@ -15,12 +19,11 @@ public class State {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
     @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "country_id")
+    @JoinColumn(name = "country_id", referencedColumnName = "id")
     private Country country;
-
 }

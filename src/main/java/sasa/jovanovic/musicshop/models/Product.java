@@ -1,8 +1,6 @@
 package sasa.jovanovic.musicshop.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -14,9 +12,11 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
+@ToString
 @AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "product")
 public class Product {
 
@@ -59,8 +59,8 @@ public class Product {
     @UpdateTimestamp
     private Date lastUpdated;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
+    @ManyToOne()
+    @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
     @NotNull
     private ProductCategory category;
 

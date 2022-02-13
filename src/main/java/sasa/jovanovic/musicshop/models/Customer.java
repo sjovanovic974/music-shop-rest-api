@@ -1,7 +1,6 @@
 package sasa.jovanovic.musicshop.models;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -11,6 +10,9 @@ import java.util.Set;
 @Table(name = "customer")
 @Getter
 @Setter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class Customer {
 
     @Id
@@ -18,20 +20,20 @@ public class Customer {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true, nullable = false)
     private String email;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
     private Set<Order> orders = new HashSet<>();
 
-    public void add(Order order){
-        if(order != null){
+    public void add(Order order) {
+        if (order != null) {
             if (orders == null) {
                 orders = new HashSet<>();
             }
