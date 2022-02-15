@@ -2,8 +2,11 @@ package sasa.jovanovic.musicshop.services;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -26,27 +29,49 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class ProductServiceImplUnitTest {
 
-    @InjectMocks
-    ProductServiceImpl service;
-
     @Mock
     ProductRepository productRepository;
 
     @Mock
     ProductCategoryRepository productCategoryRepository;
 
-    Product product;
+    @InjectMocks
+    ProductServiceImpl service;
+
+    @Captor
+    ArgumentCaptor<Product> productCaptor;
+
     List<Product> tempList;
 
     @BeforeEach
-    public void setUp() {
-        product = new Product();
+    public void initEach() {
         tempList = new ArrayList<>();
+
+        ProductCategory cd = new ProductCategory();
+        cd.setId(1L);
+
+        ProductCategory lp = new ProductCategory();
+        lp.setId(2L);
+
+        Product product1 = new Product();
+        product1.setId(1L);
+        product1.setCategory(cd);
+        product1.setName("Iron Maiden: Early Years");
+        product1.setSku("CD000011");
+
+        Product product2= new Product();
+        product2.setId(2L);
+        product2.setCategory(lp);
+        product2.setName("Metallica: Master of Puppets");
+        product2.setSku("LP000022");
+
+        tempList.add(product1);
+        tempList.add(product2);
     }
 
     @Test
+    @DisplayName("Should pass if returns exact same number of products as contained in tempList")
     void getAllProducts() {
-        tempList.add(product);
 
         when(productRepository.findAll()).thenReturn(tempList);
 
@@ -54,12 +79,13 @@ class ProductServiceImplUnitTest {
 
         Assertions.assertNotNull(returnedProducts);
         Assertions.assertEquals(returnedProducts.size(), tempList.size());
+
         verify(productRepository, times(1)).findAll();
     }
 
     @Test
+    @DisplayName("Should return a page of products")
     void getProducts() {
-        tempList.add(product);
 
         Pageable page = PageRequest.of(0, 10);
         Page<Product> products = new PageImpl<>(tempList, page, tempList.size());
@@ -70,35 +96,31 @@ class ProductServiceImplUnitTest {
 
         Assertions.assertNotNull(returnedProducts);
         Assertions.assertEquals(returnedProducts.getContent().size(), products.getContent().size());
+
         verify(productRepository, times(1)).findAll(page);
     }
 
+
+    @DisplayName("Should find a page of products belonging to the given category")
     @Test
     void findByCategoryId() {
-
-        ProductCategory category = new ProductCategory();
-        Long id = 1L;
-        category.setId(id);
-
-        product.setCategory(category);
-        tempList.add(product);
 
         Pageable page = PageRequest.of(0, 10);
         Page<Product> products = new PageImpl<>(tempList, page, tempList.size());
 
-        when(productRepository.findByCategoryId(id, page)).thenReturn(products);
+        when(productRepository.findByCategoryId(1L, page)).thenReturn(products);
 
-        Page<Product> returnedProducts = service.findByCategoryId(id, page);
+        Page<Product> returnedProducts = service.findByCategoryId(1L, page);
 
         Assertions.assertEquals(returnedProducts.getContent().get(0).getCategory().getCategoryName(),
-                product.getCategory().getCategoryName());
-        verify(productRepository, times(1)).findByCategoryId(id, page);
+                tempList.get(0).getCategory().getCategoryName());
+
+        verify(productRepository, times(1)).findByCategoryId(1L, page);
     }
 
     @Test
+    @DisplayName("Should find product by given name")
     void findByNameContaining() {
-        product.setName("Iron Maiden: Early Years");
-        tempList.add(product);
 
         Pageable page = PageRequest.of(0, 10);
         Page<Product> products = new PageImpl<>(tempList, page, tempList.size());
@@ -106,8 +128,7 @@ class ProductServiceImplUnitTest {
 
         when(productRepository.findByNameContainingIgnoreCase(argument, page)).thenReturn(products);
 
-        Page<Product> returnedProducts = productRepository.findByNameContainingIgnoreCase(argument, page);
-
+        Page<Product> returnedProducts = service.findByNameContainingIgnoreCase(argument, page);
         String returnedProductName = returnedProducts.getContent().get(0).getName();
 
         Assertions.assertTrue(returnedProductName.contains(argument));
@@ -115,62 +136,52 @@ class ProductServiceImplUnitTest {
     }
 
     @Test
+    @DisplayName("Should find product by given id")
     void getProductById() {
-        Long id = 5L;
-        product.setId(id);
 
-        when(productRepository.findById(id)).thenReturn(Optional.of(product));
-        Product returnedProduct = service.getProductById(id);
+        when(productRepository.findById(anyLong())).thenReturn(Optional.of(tempList.get(0)));
+        Product returnedProduct = service.getProductById(anyLong());
 
-        Assertions.assertEquals(returnedProduct.getId(), product.getId());
-        verify(productRepository, times(1)).findById(id);
-    }
-
-    @Test
-    void productNotFoundById() {
-
-        when(productRepository.findById(anyLong())).thenReturn(Optional.empty());
-
-        Assertions.assertThrows(NotFoundException.class, () -> {
-            service.getProductById(anyLong());
-        });
-
+        Assertions.assertEquals(returnedProduct.getId(), tempList.get(0).getId());
         verify(productRepository, times(1)).findById(anyLong());
     }
 
     @Test
-    void saveProduct() {
-        ProductCategory category = new ProductCategory();
-        Long id = 1L;
-        category.setId(id);
+    @DisplayName("Should throw NotFoundException if product was not found")
+    void productNotFoundById() {
 
-        product.setId(1L);
-        product.setSku("CD000011");
-        product.setCategory(category);
+        when(productRepository.findById(anyLong())).thenReturn(Optional.empty());
 
-        when(productRepository.save(any(Product.class))).thenReturn(product);
+        NotFoundException exception = Assertions.assertThrows(NotFoundException.class, () -> {
+            service.getProductById(99L);
+        });
 
-        Product savedProduct = service.saveProduct(product);
-
-        Assertions.assertNotNull(savedProduct);
-        verify(productRepository, times(1)).save(any());
+        Assertions.assertTrue(exception.getMessage().contains("Product was not found!"));
+        verify(productRepository, times(1)).findById(anyLong());
     }
 
     @Test
+    @DisplayName("Should save product")
+    void saveProduct() {
+
+        when(productRepository.save(any(Product.class))).thenReturn(tempList.get(0));
+
+        Product savedProduct = service.saveProduct(tempList.get(0));
+
+        Assertions.assertNotNull(savedProduct);
+        verify(productRepository, times(1)).save(productCaptor.capture());
+
+        Assertions.assertEquals(productCaptor.getValue().getSku(), tempList.get(0).getSku());
+    }
+
+    @Test
+    @DisplayName("Should update product")
     void updateProduct() {
-        ProductCategory cd = new ProductCategory();
-        Long id = 1L;
-        cd.setId(id);
-        cd.setCategoryName("CD");
 
-        product.setCategory(cd);
-        product.setId(99L);
-        product.setName("test");
+        when(productRepository.save(any(Product.class))).thenReturn(tempList.get(0));
+        Product savedProduct = service.saveProduct(tempList.get(0));
 
-        when(productRepository.save(any(Product.class))).thenReturn(product);
-        Product savedProduct = service.saveProduct(product);
-
-        savedProduct.setName("new test");
+        savedProduct.setName("Iron Maiden: Live after Death");
 
         when(productRepository.findById(savedProduct.getId())).thenReturn(Optional.of(savedProduct));
         when(productRepository.save(any(Product.class))).thenReturn(savedProduct);
@@ -180,28 +191,27 @@ class ProductServiceImplUnitTest {
         Assertions.assertEquals(savedProduct.getId(), updatedProduct.getId());
         Assertions.assertEquals(savedProduct.getName(), updatedProduct.getName());
 
-        verify(productRepository, times(2)).save(any());
+        verify(productRepository, times(1)).findById(anyLong());
+        verify(productRepository, times(2)).save(any(Product.class));
     }
 
     @Test
+    @DisplayName("Should delete product by given object")
     void deleteProduct() {
-        product.setId(1L);
-        product.setName("test product");
 
-        when(productRepository.findById(product.getId())).thenReturn(Optional.of(product));
+        when(productRepository.findById(tempList.get(0).getId())).thenReturn(Optional.of(tempList.get(0)));
 
-        service.deleteProduct(product);
-        verify(productRepository, times(1)).delete(any());
+        service.deleteProduct(tempList.get(0));
+        verify(productRepository, times(1)).delete(any(Product.class));
     }
 
     @Test
+    @DisplayName("Should delete product by given id")
     void deleteProductById() {
-        product.setId(1L);
-        product.setName("test product");
 
-        when(productRepository.findById(product.getId())).thenReturn(Optional.of(product));
+        when(productRepository.findById(anyLong())).thenReturn(Optional.of(tempList.get(0)));
 
-        service.deleteProductById(product.getId());
+        service.deleteProductById(anyLong());
         verify(productRepository, times(1)).deleteById(anyLong());
     }
 }
