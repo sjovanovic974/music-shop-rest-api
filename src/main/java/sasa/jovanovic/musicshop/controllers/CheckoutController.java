@@ -1,9 +1,7 @@
 package sasa.jovanovic.musicshop.controllers;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 import sasa.jovanovic.musicshop.dto.Purchase;
 import sasa.jovanovic.musicshop.dto.PurchaseResponse;
 import sasa.jovanovic.musicshop.services.CheckoutService;
@@ -21,6 +19,7 @@ public class CheckoutController {
     }
 
     @PostMapping("/purchase")
+    @ResponseStatus(code = HttpStatus.CREATED)
     public PurchaseResponse placeOrder(@Valid @RequestBody Purchase purchase) {
 
         return checkoutService.placeOrder(purchase);

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import sasa.jovanovic.musicshop.models.ProductCategory;
 import sasa.jovanovic.musicshop.services.ProductCategoryService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -31,12 +32,12 @@ public class ProductCategoryController {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public ProductCategory saveProductCategory(@RequestBody ProductCategory productCategory) {
+    public ProductCategory saveProductCategory(@Valid @RequestBody ProductCategory productCategory) {
         return productCategoryService.saveProductCategory(productCategory);
     }
 
     @PutMapping
-    public ProductCategory updateProductCategory(@RequestBody ProductCategory productCategory){
+    public ProductCategory updateProductCategory(@Valid @RequestBody ProductCategory productCategory){
         return productCategoryService.updateProductCategory(productCategory);
     }
 

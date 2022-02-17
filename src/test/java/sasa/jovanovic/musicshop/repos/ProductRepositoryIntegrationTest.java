@@ -1,7 +1,7 @@
 package sasa.jovanovic.musicshop.repos;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -36,18 +36,16 @@ class ProductRepositoryIntegrationTest {
     @Autowired
     private ProductCategoryRepository categoryRepository;
 
-    @BeforeEach
-    public void setUp() {
-
-    }
 
     @Test
+    @DisplayName("Should load entityManager and DataSource beans")
     void contextLoads() {
         Assertions.assertNotNull(entityManager);
         Assertions.assertNotNull(dataSource);
     }
 
     @Test
+    @DisplayName("Should find products by given category")
     void findByCategoryId() {
 
         int expected = 3;
@@ -61,17 +59,21 @@ class ProductRepositoryIntegrationTest {
     }
 
     @Test
+    @DisplayName("Should return empty page")
     void findNotByCategoryId() {
+
         int expected = 0;
 
         Pageable page = PageRequest.of(0, 10);
 
         Page<Product> returnedProducts = repository.findByCategoryId(99L, page);
 
+
         Assertions.assertEquals(expected, returnedProducts.getContent().size());
     }
 
     @Test
+    @DisplayName("Should find by name containing given string")
     void findByNameContaining() {
         int expected = 1;
 
@@ -84,29 +86,7 @@ class ProductRepositoryIntegrationTest {
     }
 
     @Test
-    void totalEntries() {
-        long expected = repository.count();
-
-        List<Product> returnedProducts = repository.findAll();
-
-        Assertions.assertNotNull(returnedProducts);
-        Assertions.assertEquals(expected, returnedProducts.size());
-    }
-
-    @Test
-    void addEntry() {
-        long countBefore = categoryRepository.count();
-
-        ProductCategory blueRay = new ProductCategory();
-        blueRay.setCategoryName("Blue Ray");
-        categoryRepository.save(blueRay);
-
-        long countAfter = categoryRepository.count();
-
-        assertThat(countBefore).isLessThan(countAfter);
-    }
-
-    @Test
+    @DisplayName("Should find the last entry in a given category")
     void findLastEntryByCategory() {
         ProductCategory cd = categoryRepository.getById(1L);
         ProductCategory vinyl = categoryRepository.getById(2L);
@@ -123,5 +103,16 @@ class ProductRepositoryIntegrationTest {
 
         assertThat(product2).isNotNull();
         assertThat(product2.getSku()).isEqualTo("LP000003");
+    }
+
+    @Test
+    @DisplayName("Should count all entries in product table")
+    void totalEntries() {
+        long expected = repository.count();
+
+        List<Product> returnedProducts = repository.findAll();
+
+        Assertions.assertNotNull(returnedProducts);
+        Assertions.assertEquals(expected, returnedProducts.size());
     }
 }

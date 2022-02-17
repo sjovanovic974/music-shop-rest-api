@@ -23,12 +23,12 @@ import static org.mockito.Mockito.*;
 class CountryServiceImplUnitTest {
 
     @Mock
-    CountryRepository repository;
+    private CountryRepository repository;
 
     @InjectMocks
-    CountryServiceImpl service;
+    private CountryServiceImpl service;
 
-    List<Country> tempList;
+    private List<Country> tempList;
 
     @BeforeEach
     public void initEach() {

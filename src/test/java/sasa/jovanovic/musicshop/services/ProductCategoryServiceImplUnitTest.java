@@ -25,15 +25,15 @@ import static org.mockito.Mockito.*;
 class ProductCategoryServiceImplUnitTest {
 
     @Mock
-    ProductCategoryRepository repository;
+    private ProductCategoryRepository repository;
 
     @InjectMocks
-    ProductCategoryServiceImpl service;
+    private ProductCategoryServiceImpl service;
 
     @Captor
-    ArgumentCaptor<ProductCategory> captor;
+    private ArgumentCaptor<ProductCategory> captor;
 
-    List<ProductCategory> tempList;
+    private List<ProductCategory> tempList;
 
     @BeforeEach
     public void initEach() {

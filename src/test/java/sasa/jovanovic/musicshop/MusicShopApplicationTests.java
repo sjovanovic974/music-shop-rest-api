@@ -1,6 +1,5 @@
 package sasa.jovanovic.musicshop;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,44 +14,46 @@ import sasa.jovanovic.musicshop.services.ProductService;
 import java.math.BigDecimal;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 @SpringBootTest
 class MusicShopApplicationTests {
 
 	@Autowired
-	ProductController productController;
+	private ProductController productController;
 
 	@Autowired
-	GlobalExceptionHandler exceptionHandler;
+	private GlobalExceptionHandler exceptionHandler;
 
 	@Autowired
-	ProductCategoryRepository productCategoryRepository;
+	private ProductCategoryRepository productCategoryRepository;
 
 	@Autowired
-	ProductRepository productRepository;
+	private ProductRepository productRepository;
 
 	@Autowired
-	ProductCategoryService productCategoryService;
+	private ProductCategoryService productCategoryService;
 
 	@Autowired
-	ProductService productService;
+	private ProductService productService;
 
 
 	@Test
 	void contextLoads() {
-		Assertions.assertThat(productController).isNotNull();
-		Assertions.assertThat(exceptionHandler).isNotNull();
-		Assertions.assertThat(productCategoryRepository).isNotNull();
-		Assertions.assertThat(productRepository).isNotNull();
-		Assertions.assertThat(productCategoryService).isNotNull();
-		Assertions.assertThat(productService).isNotNull();
+		assertThat(productController).isNotNull();
+		assertThat(exceptionHandler).isNotNull();
+		assertThat(productCategoryRepository).isNotNull();
+		assertThat(productRepository).isNotNull();
+		assertThat(productCategoryService).isNotNull();
+		assertThat(productService).isNotNull();
 	}
 
 	@Test
 	void getMediumPriceProducts(){
 		List<Product> list =
-				productRepository.getMediumPricedProducts(new BigDecimal("20.00"), new BigDecimal("45.00"));
+				productRepository.getMediumPricedProducts(new BigDecimal("20.00"), new BigDecimal("40.00"));
 
-		list.stream().forEach(item -> System.out.println(item.getName() + ": " + item.getUnitPrice()));
+		list.forEach(item -> System.out.println(item.getName() + ": " + item.getUnitPrice()));
 	}
 
 	@Test

@@ -25,13 +25,13 @@ import static org.mockito.Mockito.*;
 class CheckoutServiceImplUnitTest {
 
     @Mock
-    CustomerRepository repository;
+    private CustomerRepository repository;
 
     @InjectMocks
-    CheckoutServiceImpl service;
+    private CheckoutServiceImpl service;
 
-    Purchase purchase;
-    Customer customer;
+    private Purchase purchase;
+    private Customer customer;
 
     @BeforeEach
     void setUp() {

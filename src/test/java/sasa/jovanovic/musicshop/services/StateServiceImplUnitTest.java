@@ -23,15 +23,15 @@ import static org.mockito.Mockito.*;
 class StateServiceImplUnitTest {
 
     @Mock
-    StateRepository repository;
+    private StateRepository repository;
 
     @InjectMocks
-    StateServiceImpl service;
+    private StateServiceImpl service;
 
     @Captor
-    ArgumentCaptor<String> captor;
+    private ArgumentCaptor<String> captor;
 
-    List<State> tempList;
+    private List<State> tempList;
 
     @BeforeEach
     public void initEach() {

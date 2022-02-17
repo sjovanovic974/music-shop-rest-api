@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import sasa.jovanovic.musicshop.models.Product;
 import sasa.jovanovic.musicshop.models.ProductCategory;
@@ -23,7 +24,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     // JPQL
     @Query("select p from Product p where p.unitPrice >= :start and p.unitPrice <= :end")
-    List<Product> getMediumPricedProducts(BigDecimal start, BigDecimal end);
+    List<Product> getMediumPricedProducts(@Param("start") BigDecimal start, @Param("end") BigDecimal end);
 
     // Native Query
     @Query(value =

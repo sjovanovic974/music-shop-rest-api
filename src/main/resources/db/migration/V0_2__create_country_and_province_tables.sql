@@ -4,7 +4,7 @@ SET foreign_key_checks = 0;
 -- Table structure for table `country`
 --
 CREATE TABLE `my-music-shop-app`.`country` (
-  `id` smallint unsigned NOT NULL,
+  `id` BIGINT unsigned NOT NULL,
   `code` varchar(2) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -15,9 +15,9 @@ CREATE TABLE `my-music-shop-app`.`country` (
 --
 
 CREATE TABLE `my-music-shop-app`.`state` (
-  `id` smallint unsigned NOT NULL AUTO_INCREMENT,
+  `id` BIGINT unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
-  `country_id` smallint unsigned NOT NULL,
+  `country_id` BIGINT unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_country` (`country_id`),
   CONSTRAINT `fk_country` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`)
