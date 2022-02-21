@@ -1,5 +1,6 @@
 package sasa.jovanovic.musicshop.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
@@ -38,6 +39,7 @@ public class Customer {
     private String email;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
+    @JsonIgnore
     private Set<Order> orders = new HashSet<>();
 
     public void add(Order order) {

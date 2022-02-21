@@ -1,5 +1,6 @@
 package sasa.jovanovic.musicshop.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -46,6 +47,7 @@ public class Address {
     private String zipCode;
 
     @OneToOne
+    @JsonIgnore
     @PrimaryKeyJoinColumn
     private Order order;
 }

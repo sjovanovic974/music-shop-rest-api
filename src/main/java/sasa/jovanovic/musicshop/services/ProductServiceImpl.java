@@ -39,7 +39,7 @@ public class ProductServiceImpl implements ProductService {
     public Page<Product> findByCategoryId(Long id, Pageable page) {
         Page<Product> products = productRepository.findByCategoryId(id, page);
 
-        if (products.getSize() == 0) {
+        if (products.getContent().size() == 0) {
             log.error("No such category found!");
             throw new NotFoundException("No such category found!");
         }
@@ -52,7 +52,7 @@ public class ProductServiceImpl implements ProductService {
 
         Page<Product> products = productRepository.findByNameContainingIgnoreCase(name, page);
 
-        if (products.getSize() == 0) {
+        if (products.getContent().size() == 0) {
             log.error("No products found!");
             throw new NotFoundException("No products found!");
         }

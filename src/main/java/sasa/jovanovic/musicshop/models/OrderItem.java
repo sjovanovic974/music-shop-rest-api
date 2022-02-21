@@ -1,5 +1,6 @@
 package sasa.jovanovic.musicshop.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,6 +35,7 @@ public class OrderItem {
     private Long productId;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "order_id", referencedColumnName = "id")
     private Order order;
 }

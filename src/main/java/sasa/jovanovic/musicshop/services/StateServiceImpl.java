@@ -1,6 +1,7 @@
 package sasa.jovanovic.musicshop.services;
 
 import org.springframework.stereotype.Service;
+import sasa.jovanovic.musicshop.errorhandling.NotFoundException;
 import sasa.jovanovic.musicshop.models.State;
 import sasa.jovanovic.musicshop.repos.StateRepository;
 
@@ -19,6 +20,13 @@ public class StateServiceImpl implements StateService {
 
     @Override
     public List<State> findByCountryCode(String code) {
-        return stateRepository.findByCountryCode(code);
+
+           List<State> states = stateRepository.findByCountryCode(code);
+
+           if(states.size() == 0){
+               throw new NotFoundException("No states found!");
+           }
+
+           return states;
     }
 }
