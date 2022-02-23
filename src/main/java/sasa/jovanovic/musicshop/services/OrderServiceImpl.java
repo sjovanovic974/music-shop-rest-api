@@ -25,7 +25,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Page<Order> findByCustomerEmail(String email, Pageable pageable) {
-        Page<Order> orders = orderRepository.findByCustomerEmail(email,pageable);
+        Page<Order> orders = orderRepository.findByCustomerEmailOrderByDateCreatedDesc(email,pageable);
 
         if (orders.getContent().size() == 0) {
             log.error(">>> No orders found!");
