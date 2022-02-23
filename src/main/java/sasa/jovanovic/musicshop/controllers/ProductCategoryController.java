@@ -2,6 +2,7 @@ package sasa.jovanovic.musicshop.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import sasa.jovanovic.musicshop.models.ProductCategory;
 import sasa.jovanovic.musicshop.services.ProductCategoryService;
@@ -32,21 +33,25 @@ public class ProductCategoryController {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
+    @PreAuthorize("hasAuthority('Admin')")
     public ProductCategory saveProductCategory(@Valid @RequestBody ProductCategory productCategory) {
         return productCategoryService.saveProductCategory(productCategory);
     }
 
     @PutMapping
+    @PreAuthorize("hasAuthority('Admin')")
     public ProductCategory updateProductCategory(@Valid @RequestBody ProductCategory productCategory){
         return productCategoryService.updateProductCategory(productCategory);
     }
 
     @DeleteMapping
+    @PreAuthorize("hasAuthority('Admin')")
     public void deleteProductCategory(@RequestBody ProductCategory productCategory){
         productCategoryService.deleteProductCategory(productCategory);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('Admin')")
     public void deleteProductCategoryById(@PathVariable("id") Long id){
         productCategoryService.deleteProductCategoryById(id);
     }

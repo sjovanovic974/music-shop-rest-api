@@ -15,7 +15,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/products/**").permitAll()
-                .antMatchers("/orders/**", "/checkout/purchase")
+                .anyRequest()
                 .authenticated()
                 .and()
                 .oauth2ResourceServer()
@@ -23,6 +23,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
         http.cors();
+
         // 401 response in response body
         Okta.configureResourceServer401ResponseBody(http);
     }
